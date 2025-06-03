@@ -82,9 +82,10 @@
             </label>
             <div class="relative">
                 <textarea id="textInput" class="shadow appearance-none border rounded w-full py-2 pl-3 pr-10 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-32 resize-none dark-theme"></textarea>
-                 <button class="absolute bottom-2 right-2 bg-green-500 hover:bg-green-700 text-white p-2 rounded-full focus:outline-none focus:shadow-outline">
-                     <i class="fas fa-microphone"></i>
+                <button id="micBtn" class="absolute bottom-2 right-2 bg-green-500 hover:bg-green-700 text-white p-2 rounded-full focus:outline-none focus:shadow-outline">
+                    <i class="fas fa-microphone"></i>
                 </button>
+                
             </div>
         </div>
 
@@ -125,5 +126,6 @@
             }
         });
     </script>
+    <script src="scripts/voiceRecorder.js"></script>
 </body>
 </html>
