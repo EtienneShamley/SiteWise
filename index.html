@@ -1,67 +1,125 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>SiteWise</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+  />
+  <style>
+    .dark-theme {
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+    }
+    .dark-theme .bg-white {
+      background-color: #2a2a2a;
+    }
+    .dark-theme h1 {
+      color: #4ade80;
+    }
+    .dark-theme .text-gray-700 {
+      color: #c0c0c0;
+    }
+    .dark-theme .border {
+      border-color: #4a4a4a;
+    }
+    .dark-theme .shadow {
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+    .dark-theme .bg-blue-500 {
+      background-color: #4ade80;
+    }
+    .dark-theme .hover\:bg-blue-700:hover {
+      background-color: #22c55e;
+    }
+  </style>
 </head>
-<body class="h-full bg-[#1a1a1a] text-white font-sans">
-
-  <!-- Layout wrapper -->
-  <div class="flex h-full">
-
-    <!-- Sidebar -->
-    <aside class="w-64 bg-[#121212] border-r border-gray-700 flex flex-col">
-      <div class="p-4 border-b border-gray-700">
-        <button class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-          + New Note
-        </button>
-      </div>
-
-      <nav class="flex-1 overflow-y-auto p-2 space-y-2">
-        <!-- Placeholder for saved notes -->
-        <div class="bg-[#2a2a2a] p-3 rounded flex justify-between items-center group">
-          <span>Note 1</span>
-          <div class="opacity-0 group-hover:opacity-100 flex space-x-1 text-sm">
-            <button title="Rename"><i class="fas fa-pen"></i></button>
-            <button title="Share"><i class="fas fa-share"></i></button>
-            <button title="Archive"><i class="fas fa-box-archive"></i></button>
-            <button title="Delete"><i class="fas fa-trash"></i></button>
-          </div>
+<body class="dark-theme flex min-h-screen">
+  <!-- Sidebar -->
+  <aside class="w-64 bg-[#111] text-white p-4 border-r border-gray-700 flex flex-col">
+    <h2 class="text-xl font-bold mb-4">Notes</h2>
+    <button class="mb-4 bg-green-600 hover:bg-green-700 px-4 py-2 rounded text-sm">+ New Note</button>
+    <ul class="space-y-2 text-sm">
+      <li class="flex justify-between items-center bg-[#222] p-2 rounded">
+        Note 1
+        <div class="space-x-2 text-xs">
+          <i class="fas fa-pen cursor-pointer"></i>
+          <i class="fas fa-trash cursor-pointer"></i>
+          <i class="fas fa-share cursor-pointer"></i>
         </div>
-      </nav>
-    </aside>
+      </li>
+      <!-- More notes will go here -->
+    </ul>
+  </aside>
 
-    <!-- Main content area -->
-    <main class="flex-1 flex flex-col justify-between">
-      <section id="chatArea" class="flex-1 p-6 overflow-y-auto space-y-4">
-        <!-- Placeholder for chat history or notes -->
-        <div class="bg-[#2a2a2a] p-4 rounded-lg">Welcome to SiteWise.</div>
-      </section>
+  <!-- Main content -->
+  <main class="flex-1 p-6 flex flex-col max-w-4xl mx-auto">
+    <h1 class="text-2xl font-bold text-center mb-2">SiteWise</h1>
 
-      <!-- Input bar -->
-      <footer class="border-t border-gray-700 p-4 bg-[#1a1a1a]">
-        <div class="max-w-4xl mx-auto flex items-end space-x-3">
-          <button title="Add file" class="text-white text-xl">
-            <i class="fas fa-plus"></i>
-          </button>
-          <textarea
-            id="textInput"
-            rows="4"
-            placeholder="Message SiteWise..."
-            class="flex-1 bg-[#2a2a2a] text-white rounded-2xl resize-none px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-500"
-          ></textarea>
-          <button id="micBtn" title="Record voice" class="text-white text-xl">
-            <i class="fas fa-microphone"></i>
-          </button>
-        </div>
-      </footer>
-    </main>
+    <!-- Scrollable chat/message window -->
+    <div id="chatWindow" class="flex-1 overflow-y-auto px-2 py-2 space-y-3 border border-gray-700 rounded-lg mb-4 bg-[#2a2a2a]">
+      <!-- Messages will be injected here -->
+    </div>
 
-  </div>
+    <!-- Input and controls -->
+    <div class="relative flex items-end gap-2">
+      <!-- Upload icon -->
+      <button id="uploadBtn" class="absolute bottom-3 left-3 text-white">
+        <i class="fas fa-plus text-lg"></i>
+      </button>
 
+      <!-- Hidden input for camera -->
+      <input type="file" accept="image/*" capture="environment" id="cameraInput" class="hidden" />
+      <label for="cameraInput" class="absolute bottom-3 left-12 text-white cursor-pointer">
+        <i class="fas fa-camera text-lg"></i>
+      </label>
+
+      <!-- Textarea -->
+      <textarea
+        id="textInput"
+        rows="3"
+        placeholder="Type your note..."
+        class="flex-1 resize-none rounded-lg p-3 px-20 bg-[#1a1a1a] text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-green-400"
+      ></textarea>
+
+      <!-- Mic icon -->
+      <button id="micBtn" class="absolute bottom-3 right-3 text-green-500">
+        <i class="fas fa-microphone text-lg"></i>
+      </button>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="flex justify-between items-center mt-3">
+      <button
+        id="submitBtn"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg"
+      >
+        Submit
+      </button>
+    </div>
+  </main>
+
+  <script>
+    const chatWindow = document.getElementById("chatWindow");
+    const submitBtn = document.getElementById("submitBtn");
+    const textInput = document.getElementById("textInput");
+
+    submitBtn.addEventListener("click", () => {
+      const message = textInput.value.trim();
+      if (!message) return;
+
+      const messageBubble = document.createElement("div");
+      messageBubble.className = "bg-[#1f1f1f] text-white p-3 rounded-lg";
+      messageBubble.textContent = message;
+
+      chatWindow.appendChild(messageBubble);
+      textInput.value = "";
+      chatWindow.scrollTop = chatWindow.scrollHeight;
+    });
+  </script>
   <script src="scripts/voiceRecorder.js"></script>
 </body>
 </html>
