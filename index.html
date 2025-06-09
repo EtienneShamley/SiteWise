@@ -1,129 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SiteWise</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        .dark-theme {
-            background-color: #1a1a1a; /* Dark background */
-            color: #e0e0e0; /* Light text */
-        }
-        .dark-theme .bg-white {
-            background-color: #2a2a2a; /* Slightly lighter dark for containers */
-        }
-        .dark-theme h1 {
-            color: #4ade80; /* Green accent for header */
-        }
-        .dark-theme .text-gray-700 {
-            color: #c0c0c0; /* Lighter gray for labels */
-        }
-        .dark-theme .border {
-            border-color: #4a4a4a; /* Darker border */
-        }
-        .dark-theme .shadow, .dark-theme .shadow-md {
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Darker shadow */
-        }
-        .dark-theme .focus\\:ring {
-            --tw-ring-color: #4ade80; /* Green ring on focus */
-        }
-        .dark-theme .focus\\:border-blue-300 {
-            border-color: #4ade80; /* Green border on focus */
-        }
-        .dark-theme .hover\\:bg-gray-50:hover {
-             background-color: #3a3a3a; /* Darker hover background */
-        }
-        .dark-theme .bg-blue-500 {
-            background-color: #4ade80; /* Green accent for submit button */
-        }
-        .dark-theme .hover\\:bg-blue-700:hover {
-            background-color: #22c55e; /* Darker green on hover */
-        }
-        .dark-theme .bg-white.text-gray-700 {
-            background-color: #2a2a2a;
-            color: #e0e0e0;
-        }
-         .dark-theme .ring-black {
-            --tw-ring-color: rgba(255, 255, 255, 0.1); /* White ring with opacity */
-        }
-        .dark-theme a.text-gray-700 {
-            color: #e0e0e0;
-        }
-         .dark-theme a.hover\\:bg-gray-50:hover {
-             background-color: #3a3a3a;
-         }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SiteWise</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+  />
+  <style>
+    .dark-theme {
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+    }
+    .dark-theme .bg-white {
+      background-color: #2a2a2a;
+    }
+    .dark-theme h1 {
+      color: #4ade80;
+    }
+    .dark-theme .text-gray-700 {
+      color: #c0c0c0;
+    }
+    .dark-theme .border {
+      border-color: #4a4a4a;
+    }
+    .dark-theme .shadow {
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+    .dark-theme .bg-blue-500 {
+      background-color: #4ade80;
+    }
+    .dark-theme .hover\:bg-blue-700:hover {
+      background-color: #22c55e;
+    }
+  </style>
 </head>
-<body class="dark-theme flex justify-center items-center min-h-screen">
-    <div class="bg-white p-6 rounded-lg shadow-md w-full max-w-md dark-theme">
-        <h1 class="text-2xl font-bold mb-4 text-center">SiteWise</h1>
-
-        <div class="mb-4">
-             <label class="block text-gray-700 text-sm font-bold mb-2">
-                Media Upload:
-            </label>
-            <div class="flex space-x-4">
-                <input type="file" id="cameraUpload" accept="image/*" capture="camera" class="hidden">
-                <label for="cameraUpload" class="flex-1 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded text-center cursor-pointer focus:outline-none focus:shadow-outline">
-                    <i class="fas fa-camera mr-2"></i> Take Photo
-                </label>
-                <input type="file" id="fileUpload" accept="image/*,video/*,audio/*" class="hidden">
-                 <label for="fileUpload" class="flex-1 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded text-center cursor-pointer focus:outline-none focus:shadow-outline">
-                    <i class="fas fa-upload mr-2"></i> Upload File
-                </label>
-            </div>
+<body class="dark-theme flex min-h-screen">
+  <!-- Sidebar -->
+  <aside class="w-64 bg-[#111] text-white p-4 border-r border-gray-700 flex flex-col">
+    <h2 class="text-xl font-bold mb-4">Notes</h2>
+    <button class="mb-4 bg-green-600 hover:bg-green-700 px-4 py-2 rounded text-sm">+ New Note</button>
+    <ul class="space-y-2 text-sm">
+      <li class="flex justify-between items-center bg-[#222] p-2 rounded">
+        Note 1
+        <div class="space-x-2 text-xs">
+          <i class="fas fa-pen cursor-pointer"></i>
+          <i class="fas fa-trash cursor-pointer"></i>
+          <i class="fas fa-share cursor-pointer"></i>
         </div>
+      </li>
+      <!-- More notes will go here -->
+    </ul>
+  </aside>
 
-        <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="textInput">
-                Your Message:
-            </label>
-            <div class="relative">
-                <textarea id="textInput" class="shadow appearance-none border rounded w-full py-2 pl-3 pr-10 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-32 resize-none dark-theme"></textarea>
-                 <button class="absolute bottom-2 right-2 bg-green-500 hover:bg-green-700 text-white p-2 rounded-full focus:outline-none focus:shadow-outline">
-                     <i class="fas fa-microphone"></i>
-                </button>
-            </div>
-        </div>
+  <!-- Main content -->
+  <main class="flex-1 p-6 flex flex-col max-w-4xl mx-auto">
+    <h1 class="text-2xl font-bold text-center mb-2">SiteWise</h1>
 
-        <div class="flex justify-between items-center mb-4">
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                Submit
-            </button>
-            <div class="relative inline-block text-left">
-                <div>
-                    <button type="button" class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500" id="menu-button" aria-expanded="true" aria-haspopup="true">
-                        Export
-                        <i class="fas fa-chevron-down ml-2"></i>
-                    </button>
-                </div>
-                <div class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
-                    <div class="py-1" role="none">
-                        <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0">Export as PDF</a>
-                        <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-1">Export as DOCX</a>
-                        <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-2">Export as TXT</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <!-- Scrollable chat/message window -->
+    <div id="chatWindow" class="flex-1 overflow-y-auto px-2 py-2 space-y-3 border border-gray-700 rounded-lg mb-4 bg-[#2a2a2a]">
+      <!-- Messages will be injected here -->
     </div>
-    <script>
-        // Simple script to toggle the dropdown menu
-        const menuButton = document.getElementById('menu-button');
-        const dropdownMenu = menuButton.nextElementSibling;
 
-        menuButton.addEventListener('click', () => {
-            dropdownMenu.classList.toggle('hidden');
-        });
+    <!-- Input and controls -->
+    <div class="relative flex items-end gap-2">
+      <!-- Upload icon -->
+      <button id="uploadBtn" class="absolute bottom-3 left-3 text-white">
+        <i class="fas fa-plus text-lg"></i>
+      </button>
 
-        // Close the dropdown if the user clicks outside of it
-        window.addEventListener('click', (event) => {
-            if (!menuButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
-                dropdownMenu.classList.add('hidden');
-            }
-        });
-    </script>
+      <!-- Hidden input for camera -->
+      <input type="file" accept="image/*" capture="environment" id="cameraInput" class="hidden" />
+      <label for="cameraInput" class="absolute bottom-3 left-12 text-white cursor-pointer">
+        <i class="fas fa-camera text-lg"></i>
+      </label>
+
+      <!-- Textarea -->
+      <textarea
+        id="textInput"
+        rows="3"
+        placeholder="Type your note..."
+        class="flex-1 resize-none rounded-lg p-3 px-20 bg-[#1a1a1a] text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-green-400"
+      ></textarea>
+
+      <!-- Mic icon -->
+      <button id="micBtn" class="absolute bottom-3 right-3 text-green-500">
+        <i class="fas fa-microphone text-lg"></i>
+      </button>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="flex justify-between items-center mt-3">
+      <button
+        id="submitBtn"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg"
+      >
+        Submit
+      </button>
+    </div>
+  </main>
+
+  <script>
+    const chatWindow = document.getElementById("chatWindow");
+    const submitBtn = document.getElementById("submitBtn");
+    const textInput = document.getElementById("textInput");
+
+    submitBtn.addEventListener("click", () => {
+      const message = textInput.value.trim();
+      if (!message) return;
+
+      const messageBubble = document.createElement("div");
+      messageBubble.className = "bg-[#1f1f1f] text-white p-3 rounded-lg";
+      messageBubble.textContent = message;
+
+      chatWindow.appendChild(messageBubble);
+      textInput.value = "";
+      chatWindow.scrollTop = chatWindow.scrollHeight;
+    });
+  </script>
+  <script src="scripts/voiceRecorder.js"></script>
+  <script src="scripts/cameraHandler.js"></script>
 </body>
 </html>
