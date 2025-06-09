@@ -1,131 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-full">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SiteWise</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        .dark-theme {
-            background-color: #1a1a1a; /* Dark background */
-            color: #e0e0e0; /* Light text */
-        }
-        .dark-theme .bg-white {
-            background-color: #2a2a2a; /* Slightly lighter dark for containers */
-        }
-        .dark-theme h1 {
-            color: #4ade80; /* Green accent for header */
-        }
-        .dark-theme .text-gray-700 {
-            color: #c0c0c0; /* Lighter gray for labels */
-        }
-        .dark-theme .border {
-            border-color: #4a4a4a; /* Darker border */
-        }
-        .dark-theme .shadow, .dark-theme .shadow-md {
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Darker shadow */
-        }
-        .dark-theme .focus\\:ring {
-            --tw-ring-color: #4ade80; /* Green ring on focus */
-        }
-        .dark-theme .focus\\:border-blue-300 {
-            border-color: #4ade80; /* Green border on focus */
-        }
-        .dark-theme .hover\\:bg-gray-50:hover {
-             background-color: #3a3a3a; /* Darker hover background */
-        }
-        .dark-theme .bg-blue-500 {
-            background-color: #4ade80; /* Green accent for submit button */
-        }
-        .dark-theme .hover\\:bg-blue-700:hover {
-            background-color: #22c55e; /* Darker green on hover */
-        }
-        .dark-theme .bg-white.text-gray-700 {
-            background-color: #2a2a2a;
-            color: #e0e0e0;
-        }
-         .dark-theme .ring-black {
-            --tw-ring-color: rgba(255, 255, 255, 0.1); /* White ring with opacity */
-        }
-        .dark-theme a.text-gray-700 {
-            color: #e0e0e0;
-        }
-         .dark-theme a.hover\\:bg-gray-50:hover {
-             background-color: #3a3a3a;
-         }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SiteWise</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-<body class="dark-theme flex justify-center items-center min-h-screen">
-    <div class="bg-white p-6 rounded-lg shadow-md w-full max-w-md dark-theme">
-        <h1 class="text-2xl font-bold mb-4 text-center">SiteWise</h1>
+<body class="h-full bg-[#1a1a1a] text-white font-sans">
 
-        <div class="mb-4">
-             <label class="block text-gray-700 text-sm font-bold mb-2">
-                Media Upload:
-            </label>
-            <div class="flex space-x-4">
-                <input type="file" id="cameraUpload" accept="image/*" capture="camera" class="hidden">
-                <label for="cameraUpload" class="flex-1 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded text-center cursor-pointer focus:outline-none focus:shadow-outline">
-                    <i class="fas fa-camera mr-2"></i> Take Photo
-                </label>
-                <input type="file" id="fileUpload" accept="image/*,video/*,audio/*" class="hidden">
-                 <label for="fileUpload" class="flex-1 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded text-center cursor-pointer focus:outline-none focus:shadow-outline">
-                    <i class="fas fa-upload mr-2"></i> Upload File
-                </label>
-            </div>
+  <!-- Layout wrapper -->
+  <div class="flex h-full">
+
+    <!-- Sidebar -->
+    <aside class="w-64 bg-[#121212] border-r border-gray-700 flex flex-col">
+      <div class="p-4 border-b border-gray-700">
+        <button class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+          + New Note
+        </button>
+      </div>
+
+      <nav class="flex-1 overflow-y-auto p-2 space-y-2">
+        <!-- Placeholder for saved notes -->
+        <div class="bg-[#2a2a2a] p-3 rounded flex justify-between items-center group">
+          <span>Note 1</span>
+          <div class="opacity-0 group-hover:opacity-100 flex space-x-1 text-sm">
+            <button title="Rename"><i class="fas fa-pen"></i></button>
+            <button title="Share"><i class="fas fa-share"></i></button>
+            <button title="Archive"><i class="fas fa-box-archive"></i></button>
+            <button title="Delete"><i class="fas fa-trash"></i></button>
+          </div>
         </div>
+      </nav>
+    </aside>
 
-        <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="textInput">
-                Your Message:
-            </label>
-            <div class="relative">
-                <textarea id="textInput" class="shadow appearance-none border rounded w-full py-2 pl-3 pr-10 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-32 resize-none dark-theme"></textarea>
-                <button id="micBtn" class="absolute bottom-2 right-2 bg-green-500 hover:bg-green-700 text-white p-2 rounded-full focus:outline-none focus:shadow-outline">
-                    <i class="fas fa-microphone"></i>
-                </button>
-                
-            </div>
+    <!-- Main content area -->
+    <main class="flex-1 flex flex-col justify-between">
+      <section id="chatArea" class="flex-1 p-6 overflow-y-auto space-y-4">
+        <!-- Placeholder for chat history or notes -->
+        <div class="bg-[#2a2a2a] p-4 rounded-lg">Welcome to SiteWise.</div>
+      </section>
+
+      <!-- Input bar -->
+      <footer class="border-t border-gray-700 p-4 bg-[#1a1a1a]">
+        <div class="max-w-4xl mx-auto flex items-end space-x-3">
+          <button title="Add file" class="text-white text-xl">
+            <i class="fas fa-plus"></i>
+          </button>
+          <textarea
+            id="textInput"
+            rows="4"
+            placeholder="Message SiteWise..."
+            class="flex-1 bg-[#2a2a2a] text-white rounded-2xl resize-none px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-500"
+          ></textarea>
+          <button id="micBtn" title="Record voice" class="text-white text-xl">
+            <i class="fas fa-microphone"></i>
+          </button>
         </div>
+      </footer>
+    </main>
 
-        <div class="flex justify-between items-center mb-4">
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                Submit
-            </button>
-            <div class="relative inline-block text-left">
-                <div>
-                    <button type="button" class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500" id="menu-button" aria-expanded="true" aria-haspopup="true">
-                        Export
-                        <i class="fas fa-chevron-down ml-2"></i>
-                    </button>
-                </div>
-                <div class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
-                    <div class="py-1" role="none">
-                        <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0">Export as PDF</a>
-                        <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-1">Export as DOCX</a>
-                        <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-2">Export as TXT</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script>
-        // Simple script to toggle the dropdown menu
-        const menuButton = document.getElementById('menu-button');
-        const dropdownMenu = menuButton.nextElementSibling;
+  </div>
 
-        menuButton.addEventListener('click', () => {
-            dropdownMenu.classList.toggle('hidden');
-        });
-
-        // Close the dropdown if the user clicks outside of it
-        window.addEventListener('click', (event) => {
-            if (!menuButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
-                dropdownMenu.classList.add('hidden');
-            }
-        });
-    </script>
-    <script src="scripts/voiceRecorder.js"></script>
+  <script src="scripts/voiceRecorder.js"></script>
 </body>
 </html>
