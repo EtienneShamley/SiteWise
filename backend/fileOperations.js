@@ -47,4 +47,17 @@ router.post('/share', (req, res) => {
   res.status(200).json({ link: shareLink });
 });
 
+// Create folder
+router.post('/create-folder', async (req, res) => {
+  const { userId, folderId, name, createdAt } = req.body;
+
+  try {
+    await db.collection('users').doc(userId).collection('folders').doc(folderId).set({ name, createdAt });
+    res.status(200).json({ message: 'Folder created' });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to create folder', details: err.message });
+  }
+});
+
+
 module.exports = router;
