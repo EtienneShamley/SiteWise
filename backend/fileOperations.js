@@ -2,10 +2,13 @@ const express = require('express');
 const admin = require('firebase-admin');
 
 const router = express.Router();
-const db = admin.firestore();
+
+// ✅ Don't call admin.firestore() immediately
+// Wait until the route is hit, so Firebase is already initialized
 
 // Save note
 router.post('/save', async (req, res) => {
+  const db = admin.firestore();
   try {
     const { userId, noteId, content } = req.body;
     await db.collection('users').doc(userId).collection('notes').doc(noteId).set({ content });
@@ -15,8 +18,9 @@ router.post('/save', async (req, res) => {
   }
 });
 
-// Delete note
+// Do the same for other routes...
 router.delete('/delete/:userId/:noteId', async (req, res) => {
+  const db = admin.firestore();
   const { userId, noteId } = req.params;
   try {
     await db.collection('users').doc(userId).collection('notes').doc(noteId).delete();
@@ -26,8 +30,8 @@ router.delete('/delete/:userId/:noteId', async (req, res) => {
   }
 });
 
-// Rename note
 router.post('/rename', async (req, res) => {
+  const db = admin.firestore();
   const { userId, noteId, newTitle } = req.body;
   try {
     await db.collection('users').doc(userId).collection('notes').doc(noteId).update({ title: newTitle });
@@ -37,7 +41,6 @@ router.post('/rename', async (req, res) => {
   }
 });
 
-// Share note (dummy - will evolve)
 router.post('/share', (req, res) => {
   const { userId, noteId } = req.body;
   const shareLink = `https://sitewise.app/share/${userId}/${noteId}`;
