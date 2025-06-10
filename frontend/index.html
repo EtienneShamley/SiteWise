@@ -39,10 +39,22 @@
   </head>
   <body class="dark-theme flex min-h-screen">
     <!-- Sidebar -->
-    <aside class="w-64 bg-[#111] text-white p-4 border-r border-gray-700 flex flex-col">
+    <aside
+      class="w-64 bg-[#111] text-white p-4 border-r border-gray-700 flex flex-col"
+    >
       <h2 class="text-xl font-bold mb-4">Notes</h2>
-      <button id="newFolderBtn" class="mb-2 bg-green-600 hover:bg-green-700 px-4 py-2 rounded text-sm">+ New Folder</button>
-      <button id="newNoteBtn" class="mb-4 bg-green-600 hover:bg-green-700 px-4 py-2 rounded text-sm">+ New Note</button>
+      <button
+        id="newFolderBtn"
+        class="mb-2 bg-green-600 hover:bg-green-700 px-4 py-2 rounded text-sm"
+      >
+        + New Folder
+      </button>
+      <button
+        id="newNoteBtn"
+        class="mb-4 bg-green-600 hover:bg-green-700 px-4 py-2 rounded text-sm"
+      >
+        + New Note
+      </button>
       <ul id="folderList" class="space-y-2 text-sm">
         <!-- Folders and Notes will be injected here -->
       </ul>
@@ -53,7 +65,10 @@
       <h1 class="text-2xl font-bold text-center mb-2">SiteWise</h1>
 
       <!-- Scrollable chat/message window -->
-      <div id="chatWindow" class="flex-1 overflow-y-auto px-2 py-2 space-y-3 border border-gray-700 rounded-lg mb-4 bg-[#2a2a2a]">
+      <div
+        id="chatWindow"
+        class="flex-1 overflow-y-auto px-2 py-2 space-y-3 border border-gray-700 rounded-lg mb-4 bg-[#2a2a2a]"
+      >
         <!-- Messages will be injected here -->
       </div>
 
@@ -65,8 +80,17 @@
         </button>
 
         <!-- Hidden input for camera -->
-        <input type="file" accept="image/*" capture="environment" id="cameraInput" class="hidden" />
-        <label for="cameraInput" class="absolute bottom-3 left-12 text-white cursor-pointer">
+        <input
+          type="file"
+          accept="image/*"
+          capture="environment"
+          id="cameraInput"
+          class="hidden"
+        />
+        <label
+          for="cameraInput"
+          class="absolute bottom-3 left-12 text-white cursor-pointer"
+        >
           <i class="fas fa-camera text-lg"></i>
         </label>
 
@@ -95,9 +119,8 @@
       </div>
     </main>
 
-    <script src="frontend/cameraHandler.js"></script>
-    <script src="frontend/voiceRecorder.js"></script>
-    <script src="frontend/app.js"></script>
-    
+    <script src="./cameraHandler.js"></script>
+    <script src="./voiceRecorder.js"></script>
+    <script src="./app.js"></script>
   </body>
 </html>
