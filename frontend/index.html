@@ -18,7 +18,7 @@
         background-color: #2a2a2a;
       }
       .dark-theme h1 {
-        color: #4ade80;
+        color: #facc15;
       }
       .dark-theme .text-gray-700 {
         color: #c0c0c0;
@@ -30,17 +30,14 @@
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
       }
       .dark-theme .bg-blue-500 {
-        background-color: #4ade80;
-      }
-      .dark-theme .hover\:bg-blue-700:hover {
-        background-color: #22c55e;
+        background-color: #facc15;
       }
     </style>
   </head>
   <body class="dark-theme flex min-h-screen">
     <!-- Sidebar -->
     <aside
-      class="w-64 bg-[#111] text-white p-4 border-r border-gray-700 flex flex-col"
+      class="w-64 bg-[#111] text-black p-4 border-r border-gray-700 flex flex-col"
     >
       <h2 class="text-xl font-bold mb-4">Notes</h2>
       <button
@@ -75,7 +72,7 @@
       <!-- Input and controls -->
       <div class="relative flex items-end gap-2">
         <!-- Upload icon -->
-        <button id="uploadBtn" class="absolute bottom-3 left-3 text-white">
+        <button id="uploadBtn" class="absolute bottom-3 left-3 text-black">
           <i class="fas fa-plus text-lg"></i>
         </button>
 
@@ -89,7 +86,7 @@
         />
         <label
           for="cameraInput"
-          class="absolute bottom-3 left-12 text-white cursor-pointer"
+          class="absolute bottom-3 left-12 text-black cursor-pointer"
         >
           <i class="fas fa-camera text-lg"></i>
         </label>
@@ -99,11 +96,14 @@
           id="textInput"
           rows="3"
           placeholder="Type your note..."
-          class="flex-1 resize-none rounded-lg p-3 px-20 bg-[#1a1a1a] text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-green-400"
+          class="flex-1 resize-none rounded-lg p-3 px-20 bg-[#1a1a1a] text-black border border-gray-700 focus:outline-none focus:ring-2 focus:ring-green-400"
         ></textarea>
 
         <!-- Mic icon -->
-        <button id="micBtn" class="absolute bottom-3 right-3 text-yellow-500 hover:text-yellow-600">
+        <button
+          id="micBtn"
+          class="absolute bottom-3 right-3 text-yellow-500 hover:text-yellow-600"
+        >
           <i class="fas fa-microphone text-lg"></i>
         </button>
       </div>
@@ -112,7 +112,7 @@
       <div class="flex justify-between items-center mt-3">
         <button
           id="submitBtn"
-          class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-6 rounded-lg"
+          class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-6 rounded-lg"
         >
           Submit
         </button>
