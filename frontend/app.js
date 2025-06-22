@@ -20,7 +20,7 @@ newProjectBtn.addEventListener("click", () => {
   activeProjectId = projectId;
 
   const projectEl = document.createElement("li");
-  projectEl.className = "text-green-400 font-bold";
+  projectEl.className = "text-yellow-500 font-bold";
   projectEl.textContent = name;
 
   const folderContainer = document.createElement("ul");
@@ -58,7 +58,8 @@ newFolderBtn.addEventListener("click", async () => {
 // === RENDER FOLDER ===
 function renderFolder(folderId, folderName) {
   const folderEl = document.createElement("li");
-  folderEl.className = "bg-[#222] p-2 rounded text-sm";
+  folderEl.className =
+    "bg-yellow-500 text-black hover:bg-yellow-600 transition p-2 rounded text-sm font-medium";
 
   folderEl.innerHTML = `
     <div class="flex justify-between items-center">
@@ -69,7 +70,7 @@ function renderFolder(folderId, folderName) {
         <i class="fas fa-trash cursor-pointer" title="Delete"></i>
       </div>
     </div>
-    <ul id="notes-${folderId}" class="ml-4 mt-2 space-y-1 text-xs text-gray-300">
+    <ul id="notes-${folderId}" class="ml-4 mt-2 space-y-1 text-xs text-gray-800">
       <!-- Notes will go here -->
     </ul>
   `;
@@ -105,13 +106,13 @@ function renderNote(noteId, title, folderId = null) {
   const noteEl = document.createElement("li");
   noteEl.dataset.noteId = noteId;
   noteEl.className =
-    "flex justify-between items-center bg-[#222] p-2 rounded text-sm";
+    "flex justify-between items-center bg-yellow-300 text-black hover:bg-yellow-400 transition p-2 rounded text-sm font-medium";
   noteEl.innerHTML = `
-    <span>${title}</span>
+    <span class="note-title">${title}</span>
     <div class="space-x-2 text-xs">
-      <i class="fas fa-pen cursor-pointer" title="Rename"></i>
-      <i class="fas fa-trash cursor-pointer" title="Delete"></i>
-      <i class="fas fa-share cursor-pointer" title="Share"></i>
+      <i class="fas fa-pen cursor-pointer rename-note" title="Rename"></i>
+      <i class="fas fa-trash cursor-pointer delete-note" title="Delete"></i>
+      <i class="fas fa-share cursor-pointer" title="Share (coming soon)"></i>
     </div>
   `;
 
@@ -209,5 +210,50 @@ submitBtn.addEventListener("click", async () => {
     textInput.value = "";
   } catch (err) {
     console.error("❌ Failed to save message:", err);
+  }
+});
+
+// === RENAME / DELETE NOTE ACTIONS ===
+noteList.addEventListener("click", async (e) => {
+  const noteEl = e.target.closest("li");
+  const noteId = noteEl?.dataset?.noteId;
+  if (!noteId) return;
+
+  // Rename
+  if (e.target.classList.contains("rename-note")) {
+    const newName = prompt("Rename note:", noteEl.querySelector(".note-title").textContent);
+    if (!newName) return;
+
+    try {
+      const res = await fetch("http://localhost:3001/api/files/rename-note", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId, noteId, newName }),
+      });
+      const data = await res.json();
+      console.log("✏️ Renamed:", data.message);
+      noteEl.querySelector(".note-title").textContent = newName;
+    } catch (err) {
+      console.error("❌ Rename failed:", err);
+    }
+  }
+
+  // Delete
+  if (e.target.classList.contains("delete-note")) {
+    const confirmDelete = confirm("Delete this note?");
+    if (!confirmDelete) return;
+
+    try {
+      const res = await fetch("http://localhost:3001/api/files/delete-note", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId, noteId }),
+      });
+      const data = await res.json();
+      console.log("🗑 Deleted:", data.message);
+      noteEl.remove();
+    } catch (err) {
+      console.error("❌ Delete failed:", err);
+    }
   }
 });

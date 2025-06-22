@@ -17,9 +17,6 @@
       .dark-theme .bg-white {
         background-color: #2a2a2a;
       }
-      .dark-theme h1 {
-        color: #4ade80;
-      }
       .dark-theme .text-gray-700 {
         color: #c0c0c0;
       }
@@ -29,12 +26,7 @@
       .dark-theme .shadow {
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
       }
-      .dark-theme .bg-blue-500 {
-        background-color: #4ade80;
-      }
-      .dark-theme .hover\:bg-blue-700:hover {
-        background-color: #22c55e;
-      }
+      /* Removed green override for h1 */
     </style>
   </head>
   <body class="dark-theme flex min-h-screen">
@@ -44,24 +36,27 @@
     >
       <button
         id="newProjectBtn"
-        class="mb-2 bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded text-sm"
+        class="mb-2 bg-yellow-500 hover:bg-yellow-600 text-black font-semibold px-4 py-2 rounded text-sm"
       >
         + New Project
       </button>
 
       <h2 class="text-xl font-bold mb-4">Notes</h2>
+
       <button
         id="newFolderBtn"
-        class="mb-2 bg-green-600 hover:bg-green-700 px-4 py-2 rounded text-sm"
+        class="mb-2 bg-yellow-500 hover:bg-yellow-600 text-black font-semibold px-4 py-2 rounded text-sm"
       >
         + New Folder
       </button>
+
       <button
         id="newNoteBtn"
-        class="mb-4 bg-green-600 hover:bg-green-700 px-4 py-2 rounded text-sm"
+        class="mb-4 bg-yellow-500 hover:bg-yellow-600 text-black font-semibold px-4 py-2 rounded text-sm"
       >
         + New Note
       </button>
+
       <ul id="folderList" class="space-y-2 text-sm">
         <!-- Folders and Notes will be injected here -->
       </ul>
@@ -69,7 +64,9 @@
 
     <!-- Main content -->
     <main class="flex-1 p-6 flex flex-col max-w-4xl mx-auto">
-      <h1 class="text-2xl font-bold text-center mb-2">SiteWise</h1>
+      <h1 class="text-2xl font-bold text-yellow-500 text-center mb-2">
+        SiteWise
+      </h1>
 
       <!-- Scrollable chat/message window -->
       <div
@@ -106,11 +103,11 @@
           id="textInput"
           rows="3"
           placeholder="Type your note..."
-          class="flex-1 resize-none rounded-lg p-3 px-20 bg-[#1a1a1a] text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-green-400"
+          class="flex-1 resize-none rounded-lg p-3 px-20 bg-[#1a1a1a] text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-yellow-500"
         ></textarea>
 
         <!-- Mic icon -->
-        <button id="micBtn" class="absolute bottom-3 right-3 text-green-500">
+        <button id="micBtn" class="absolute bottom-3 right-3 text-yellow-500">
           <i class="fas fa-microphone text-lg"></i>
         </button>
       </div>
@@ -119,7 +116,7 @@
       <div class="flex justify-between items-center mt-3">
         <button
           id="submitBtn"
-          class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded-lg"
+          class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-6 rounded-lg"
         >
           Submit
         </button>
