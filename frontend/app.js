@@ -12,13 +12,6 @@ const newProjectBtn = document.getElementById("newProjectBtn");
 const newFolderBtn = document.getElementById("newFolderBtn");
 const newNoteBtn = document.getElementById("newNoteBtn");
 
-document.getElementById("toggleLeftPane").onclick = () => {
-  document.getElementById("leftPane").classList.toggle("hide");
-};
-document.getElementById("toggleMiddlePane").onclick = () => {
-  document.getElementById("middlePane").classList.toggle("hide");
-};
-
 // === Create Project ===
 newProjectBtn.addEventListener("click", () => {
   const name = prompt("Project name:", "Untitled Project");
@@ -67,15 +60,15 @@ function renderFolders(projectId) {
 
     folder.notes.forEach((note) => {
       const noteEl = document.createElement("li");
-      noteEl.className = "bg-[#1a1a1a] text-white p-1 rounded flex justify-between items-center hover:bg-gray-700";
+      noteEl.className = "bg-[#1a1a1a] text-white p-2 rounded flex justify-between items-center hover:bg-gray-700";
       noteEl.innerHTML = `
-        <span>${note.title}</span>
-        <div class="space-x-2 text-xs">
-          <i class="fas fa-copy cursor-pointer" title="Copy"></i>
-          <i class="fas fa-file-export cursor-pointer" title="Export"></i>
+        <span class="flex-1 cursor-pointer" onclick="loadNote('${note.id}')">${note.title}</span>
+        <div class="space-x-2 text-xs flex-shrink-0">
+          <i class="fas fa-pen cursor-pointer" title="Rename" onclick="renameNote(event, '${folder.id}', '${note.id}')"></i>
+          <i class="fas fa-trash cursor-pointer" title="Delete" onclick="deleteNote(event, '${folder.id}', '${note.id}')"></i>
+          <i class="fas fa-share cursor-pointer" title="Share" onclick="shareNote(event, '${note.id}')"></i>
         </div>
       `;
-      noteEl.onclick = () => loadNote(note.id);
       document.getElementById(`notes-${folder.id}`).appendChild(noteEl);
     });
   });
@@ -86,18 +79,43 @@ window.addNote = (folderId) => {
   const noteId = `note-${Date.now()}`;
   const title = prompt("Note title:", "Untitled Note");
   if (!title) return;
-  const projectFolders = folderMap[activeProjectId];
-
-  const folder = projectFolders.find((f) => f.id === folderId);
+  const folder = folderMap[activeProjectId].find((f) => f.id === folderId);
   folder.notes.push({ id: noteId, title });
   renderFolders(activeProjectId);
 };
 
 // === Load Note ===
-function loadNote(noteId) {
+window.loadNote = (noteId) => {
   currentNoteId = noteId;
   chatWindow.innerHTML = `<div class="bg-[#2a2a2a] text-white p-3 rounded-lg">Opened: ${noteId}</div>`;
-}
+};
+
+// === Rename Note ===
+window.renameNote = (event, folderId, noteId) => {
+  event.stopPropagation();
+  const newTitle = prompt("New title:");
+  if (!newTitle) return;
+  const folder = folderMap[activeProjectId].find((f) => f.id === folderId);
+  const note = folder.notes.find((n) => n.id === noteId);
+  note.title = newTitle;
+  renderFolders(activeProjectId);
+};
+
+// === Delete Note ===
+window.deleteNote = (event, folderId, noteId) => {
+  event.stopPropagation();
+  const confirmDelete = confirm("Delete this note?");
+  if (!confirmDelete) return;
+  const folder = folderMap[activeProjectId].find((f) => f.id === folderId);
+  folder.notes = folder.notes.filter((n) => n.id !== noteId);
+  renderFolders(activeProjectId);
+};
+
+// === Share Note ===
+window.shareNote = (event, noteId) => {
+  event.stopPropagation();
+  alert(`This would open share/export options for note: ${noteId}`);
+};
 
 // === Submit ===
 submitBtn.addEventListener("click", () => {
