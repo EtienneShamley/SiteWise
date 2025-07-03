@@ -29,10 +29,15 @@
       .hide {
         display: none;
       }
+      .expandable-textarea {
+        line-height: 1.4;
+        font-size: 14px;
+        min-height: calc(1.4em * 2 + 1.2em); /* 2 lines + padding fudge */
+      }
     </style>
   </head>
   <body class="flex min-h-screen">
-    <!-- Left Sidebar (Projects & Folders) -->
+    <!-- Left Sidebar -->
     <aside
       id="leftPane"
       class="resizable-pane bg-[#111] p-4 border-r border-gray-700 flex flex-col space-y-2"
@@ -71,7 +76,7 @@
       Projects
     </button>
 
-    <!-- Middle Pane (Notes list) -->
+    <!-- Middle Pane -->
     <aside
       id="middlePane"
       class="resizable-pane bg-[#1a1a1a] p-3 border-r border-gray-800 space-y-2 overflow-y-auto"
@@ -103,31 +108,70 @@
       Notes
     </button>
 
-    <!-- Main Chat Area -->
+    <!-- Main Chat + Template Area -->
     <main class="flex-1 p-6 flex flex-col max-w-4xl mx-auto">
       <h1 class="text-2xl font-bold text-white text-center mb-2">SiteWise</h1>
 
-      <div
-        id="chatWindow"
-        class="flex-1 overflow-y-auto px-2 py-2 space-y-3 border border-gray-700 rounded-lg mb-4 bg-[#2a2a2a]"
-      ></div>
+      <!-- Chat and Template Container -->
+      <div class="flex-1 flex flex-col justify-between">
+        <!-- Chat Window -->
+        <div
+          id="chatWindow"
+          class="overflow-y-auto px-2 py-2 space-y-3 border border-gray-700 rounded-lg mb-4 bg-[#2a2a2a] flex-1"
+        ></div>
 
-      <div class="relative flex items-end gap-2">
-        <textarea
-          id="textInput"
-          rows="3"
-          placeholder="Type your note..."
-          class="flex-1 resize-none rounded-lg p-3 bg-[#1a1a1a] text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-green-400"
-        ></textarea>
-        <button
-          id="submitBtn"
-          class="bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-6 rounded-lg"
+        <!-- Template Builder -->
+        <div
+          id="templateBuilder"
+          class="hidden flex flex-col gap-4 text-white mt-4"
         >
-          Submit
-        </button>
+          <button
+            id="addSectionBtn"
+            class="bg-gray-700 hover:bg-gray-600 px-3 py-1 rounded text-xs w-fit"
+          >
+            + Add Section
+          </button>
+          <div id="templateSections" class="space-y-4"></div>
+        </div>
+
+        <!-- Chat Input Box (Always at bottom) -->
+        <div class="relative mt-4">
+          <textarea
+            id="textInput"
+            rows="3"
+            placeholder="Type your note..."
+            class="w-full resize-none rounded-lg p-3 pr-20 bg-[#1a1a1a] text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-green-400"
+          ></textarea>
+
+          <div class="absolute bottom-3 right-3 flex gap-2">
+            <button
+              id="micBtn"
+              class="text-white hover:text-red-500 text-xl"
+              title="Start voice note"
+            >
+              <i class="fas fa-microphone"></i>
+            </button>
+            <button
+              id="submitBtn"
+              class="bg-white text-black hover:bg-gray-300 p-2 rounded-full"
+              title="Submit"
+            >
+              <i class="fas fa-arrow-up"></i>
+            </button>
+          </div>
+        </div>
       </div>
+
+      <!-- Create Template Button (Stays at bottom of page but visible first) -->
+      <button
+        id="createTemplateBtn"
+        class="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded text-sm w-fit mt-6"
+      >
+        + Create Template
+      </button>
     </main>
 
+    <!-- Pane Toggle Script -->
     <script>
       const toggleLeftPaneBtn = document.getElementById("toggleLeftPane");
       const toggleMiddlePaneBtn = document.getElementById("toggleMiddlePane");
@@ -158,7 +202,7 @@
     </script>
 
     <script src="./cameraHandler.js"></script>
-    <script src="./voiceRecorder.js"></script>
     <script src="./app.js"></script>
+    <script src="./voiceRecorder.js"></script>
   </body>
 </html>

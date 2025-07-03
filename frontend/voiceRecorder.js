@@ -8,23 +8,21 @@ recordBtn.addEventListener("click", async () => {
     if (!mediaRecorder || mediaRecorder.state === "inactive") {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       mediaRecorder = new MediaRecorder(stream);
-      audioChunks = []; // Clear previous chunks
+      audioChunks = [];
 
       mediaRecorder.ondataavailable = (e) => {
         if (e.data.size > 0) audioChunks.push(e.data);
       };
 
       mediaRecorder.onstop = () => {
-        const audioBlob = new Blob(audioChunks, { type: "audio/webm" }); // Store as Blob
-        console.log("🎤 Audio recorded:", audioBlob); // Log Blob
-
-        // Future: Send audioBlob to OpenAI Whisper API here
+        const audioBlob = new Blob(audioChunks, { type: "audio/webm" });
+        console.log("🎤 Audio recorded:", audioBlob);
+        // Future: send to OpenAI Whisper
       };
 
-      mediaRecorder.start(); // Start recording
-      recordBtn.classList.add("text-red-500"); // Highlight icon
+      mediaRecorder.start();
+      recordBtn.classList.add("text-red-500");
     } else {
-        const audioBlob = new Blob(audioChunks, { type: "audio/webm" });
       mediaRecorder.stop();
       recordBtn.classList.remove("text-red-500");
     }

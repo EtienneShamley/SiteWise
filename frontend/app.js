@@ -20,7 +20,8 @@ newProjectBtn.addEventListener("click", () => {
   activeProjectId = id;
 
   const projectEl = document.createElement("li");
-  projectEl.className = "text-white cursor-pointer hover:bg-gray-700 px-2 py-1 rounded";
+  projectEl.className =
+    "text-white cursor-pointer hover:bg-gray-700 px-2 py-1 rounded";
   projectEl.textContent = name;
   projectEl.onclick = () => {
     renderFolders(id);
@@ -60,7 +61,8 @@ function renderFolders(projectId) {
 
     folder.notes.forEach((note) => {
       const noteEl = document.createElement("li");
-      noteEl.className = "bg-[#1a1a1a] text-white p-2 rounded flex justify-between items-center hover:bg-gray-700";
+      noteEl.className =
+        "bg-[#1a1a1a] text-white p-2 rounded flex justify-between items-center hover:bg-gray-700";
       noteEl.innerHTML = `
         <span class="flex-1 cursor-pointer" onclick="loadNote('${note.id}')">${note.title}</span>
         <div class="space-x-2 text-xs flex-shrink-0">
@@ -126,4 +128,75 @@ submitBtn.addEventListener("click", () => {
   bubble.textContent = message;
   chatWindow.appendChild(bubble);
   textInput.value = "";
+});
+
+let currentTemplate = null;
+
+const createTemplateBtn = document.getElementById("createTemplateBtn");
+const addSectionBtn = document.getElementById("addSectionBtn");
+const templateBuilder = document.getElementById("templateBuilder");
+const templateSections = document.getElementById("templateSections");
+
+// Show Template Builder
+createTemplateBtn.addEventListener("click", () => {
+  currentTemplate = {
+    id: `template-${Date.now()}`,
+    sections: ["Site Address", "Weather", "Equipment", "Notes"],
+  };
+  renderTemplate();
+});
+
+// Add new section
+addSectionBtn.addEventListener("click", () => {
+  const name = prompt("Section name:");
+  if (name) {
+    currentTemplate.sections.push(name);
+    renderTemplate();
+  }
+});
+
+// === Render template sections ===
+function renderTemplate() {
+  templateSections.innerHTML = "";
+
+  currentTemplate.sections.forEach((section) => {
+    const sectionEl = document.createElement("div");
+    sectionEl.className = "flex flex-col gap-1";
+    sectionEl.innerHTML = `
+      <label class="font-semibold text-sm">${section}</label>
+      <textarea
+        rows="2"
+        class="expandable-textarea w-full bg-[#1a1a1a] border border-gray-600 rounded p-2 text-white resize-none overflow-hidden"
+        placeholder="Type here..."
+      ></textarea>
+    `;
+    templateSections.appendChild(sectionEl);
+  });
+
+  // Auto-resize all textareas
+  templateSections.querySelectorAll(".expandable-textarea").forEach((textarea) => {
+    textarea.addEventListener("input", () => {
+      textarea.style.height = "auto";
+      textarea.style.height = textarea.scrollHeight + "px";
+    });
+    textarea.style.height = "auto";
+    textarea.style.height = textarea.scrollHeight + "px";
+  });
+
+  templateBuilder.classList.remove("hidden");
+  addSectionBtn.classList.remove("hidden");
+  chatWindow.classList.add("hidden"); // Hide chat if showing
+}
+
+// === Template builder toggle and dynamic section creation ===
+document.addEventListener("DOMContentLoaded", () => {
+  const createTemplateBtn = document.getElementById("createTemplateBtn");
+  const templateBuilder = document.getElementById("templateBuilder");
+  const templateSections = document.getElementById("templateSections");
+  const addSectionBtn = document.getElementById("addSectionBtn");
+
+  createTemplateBtn.addEventListener("click", () => {
+    templateBuilder.classList.remove("hidden");
+    addSectionBtn.classList.remove("hidden");
+  });
 });
