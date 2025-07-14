@@ -18,11 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const newFolderBtn   = document.getElementById("newFolderBtn");
   const newRootNoteBtn = document.getElementById("newRootNoteBtn");
   const middlePane     = document.getElementById("middlePane");
-  const createTemplateBtn = document.getElementById("createTemplateBtn");
-  const addSectionBtn     = document.getElementById("addSectionBtn");
-  const templateBuilder   = document.getElementById("templateBuilder");
-  const templateSections  = document.getElementById("templateSections");
-  const backToChatBtn     = document.getElementById("backToChatBtn");
 
   middlePane.style.display = "none";
 
@@ -415,59 +410,8 @@ document.addEventListener("DOMContentLoaded", () => {
     chatWindow.appendChild(div);
     textInput.value = "";
   });
-
-  // --- TEMPLATE BUILDER ---
-  let currentTemplate = null;
-  createTemplateBtn.addEventListener("click", () => {
-    currentTemplate = {
-      id: `template-${Date.now()}`,
-      sections: ["Site Address", "Weather", "Equipment", "Notes"],
-    };
-    renderTemplate();
-  });
-  addSectionBtn.addEventListener("click", () => {
-    const name = prompt("Section name:");
-    if (name) {
-      currentTemplate.sections.push(name);
-      renderTemplate();
-    }
-  });
-  function renderTemplate() {
-    templateSections.innerHTML = "";
-    currentTemplate.sections.forEach((s) => {
-      const wrap = document.createElement("div");
-      wrap.className = "flex flex-col gap-1";
-      wrap.innerHTML = `
-        <label class="font-semibold text-sm">${s}</label>
-        <textarea rows="2"
-          class="expandable-textarea w-full bg-[#1a1a1a] border border-gray-600 rounded p-2 text-white resize-none overflow-hidden"
-          placeholder="Type here..."></textarea>`;
-      templateSections.appendChild(wrap);
-    });
-
-    templateSections.querySelectorAll(".expandable-textarea").forEach((ta) => {
-      ta.addEventListener("input", () => {
-        ta.style.height = "auto";
-        ta.style.height = ta.scrollHeight + "px";
-      });
-      ta.style.height = "auto";
-      ta.style.height = ta.scrollHeight + "px";
-    });
-
-    templateBuilder.classList.remove("hidden");
-    chatWindow.classList.add("hidden");
-  }
-  if (backToChatBtn) {
-    backToChatBtn.addEventListener("click", () => {
-      templateBuilder.classList.add("hidden");
-      chatWindow.classList.remove("hidden");
-    });
-  }
-
-  // --- Initial Render ---
-  renderRootNotes();
-  renderProjects();
 });
+
 // --- UPLOAD "+" BUTTON LOGIC ---
 const chatUploadBtn = document.getElementById("chatUploadBtn");
 const chatFileInput = document.getElementById("chatFileInput");
@@ -487,4 +431,3 @@ if (chatUploadBtn && chatFileInput) {
     }
   });
 }
-
