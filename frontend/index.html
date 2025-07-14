@@ -10,6 +10,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
     <style>
+      /* DARK THEME (default) */
       .dark-theme {
         background-color: #1a1a1a;
         color: white;
@@ -17,8 +18,148 @@
       .dark-theme .text-gray-700 {
         color: white;
       }
-      .dark-theme .hover\:bg-gray-700:hover {
-        background-color: #3a3a3a;
+      .dark-theme #leftPane {
+        background-color: #111 !important;
+        color: #fff !important;
+      }
+      /* Sidebar row (project/folder) normal */
+      .dark-theme #leftPane li > div {
+        background: #111 !important;
+        color: #fff !important;
+        border-radius: 6px;
+        transition: background 0.15s, color 0.15s;
+      }
+      /* Highlighted project/folder row in dark mode */
+      .dark-theme #leftPane li > div.bg-gray-400,
+      .dark-theme #leftPane li > div.bg-gray-600 {
+        background: #3a3a3a !important; /* Neutral grey for active */
+        color: #fff !important;
+        font-weight: bold !important;
+      }
+      /* Hover on sidebar row in dark mode (not when selected) */
+      .dark-theme #leftPane li > div:not(.bg-gray-400):not(.bg-gray-600):hover {
+        background: #232323 !important;
+        color: #fff !important;
+      }
+
+      /* LIGHT THEME */
+      .light-theme {
+        background-color: #f6f6f6;
+        color: #232323;
+      }
+      .light-theme #leftPane {
+        background-color: #f5f5f5 !important;
+        color: #181818 !important;
+      }
+      .light-theme #leftPane li,
+      .light-theme #leftPane ul {
+        background: transparent !important;
+        color: #222 !important;
+      }
+      .light-theme h1,
+      .light-theme h2 {
+        color: #111 !important;
+      }
+      .light-theme #createTemplateBtn {
+        background: #111 !important;
+        color: #fff !important;
+      }
+      /* Folders lighter in light mode */
+      .light-theme .bg-\[\#222\] {
+        background-color: #eaeaea !important;
+        color: #232323 !important;
+      }
+      .light-theme .bg-\[\#252525\] {
+        background-color: #fff !important;
+        color: #111 !important;
+      }
+      .light-theme .bg-\[\#1a1a1a\] {
+        background-color: #f9f9f9 !important;
+        color: #181818 !important;
+      }
+      /* Chat window: white in light, dark border */
+      .light-theme #chatWindow {
+        background-color: #fff !important;
+        color: #232323 !important;
+        border: 1.5px solid #232323 !important;
+      }
+      .light-theme #textInput {
+        background-color: #f5f5f5 !important;
+        color: #111 !important;
+        border: 1px solid #232323 !important;
+      }
+
+      /* Sidebar row (project/folder) normal in light */
+      .light-theme #leftPane li > div {
+        background: #f0f0f0 !important;
+        color: #181818 !important;
+        border-radius: 6px;
+        transition: background 0.15s, color 0.15s;
+      }
+      /* Sidebar row hover (unselected only) in light */
+      .light-theme
+        #leftPane
+        li
+        > div:not(.bg-gray-400):not(.bg-gray-600):hover {
+        background: #e0e0e0 !important;
+        color: #111 !important;
+      }
+      /* Sidebar row highlighted in light */
+      .light-theme #leftPane li > div.bg-gray-400,
+      .light-theme #leftPane li > div.bg-gray-600 {
+        background: #d4d4d4 !important; /* Neutral grey highlight for active */
+        color: #181818 !important;
+        font-weight: bold !important;
+      }
+
+      /* Sidebar add buttons: lighter hover, always readable in light mode */
+      .light-theme #newProjectBtn,
+      .light-theme #newFolderBtn,
+      .light-theme #newRootNoteBtn {
+        color: #fff !important;
+        background: #181818 !important;
+        transition: background 0.2s;
+      }
+      .light-theme #newProjectBtn:hover,
+      .light-theme #newFolderBtn:hover,
+      .light-theme #newRootNoteBtn:hover {
+        background: #666 !important;
+        color: #fff !important;
+      }
+      .light-theme #newProjectBtn:hover i,
+      .light-theme #newFolderBtn:hover i,
+      .light-theme #newRootNoteBtn:hover i {
+        color: #fff !important;
+      }
+
+      /* Action icons in list */
+      .light-theme #leftPane i {
+        color: #444 !important;
+      }
+
+      /* Upload file button: always visible */
+      #chatUploadBtn {
+        background: transparent;
+      }
+      .dark-theme #chatUploadBtn i {
+        color: #fff;
+      }
+      .light-theme #chatUploadBtn i {
+        color: #232323;
+      }
+
+      /* Voice icon: white in dark, dark in light */
+      .dark-theme #micBtn i {
+        color: #fff;
+      }
+      .light-theme #micBtn i {
+        color: #232323;
+      }
+
+      /* Send button always white */
+      #submitBtn {
+        background: #fff;
+        color: #111;
       }
       .resizable-pane {
         resize: horizontal;
@@ -40,7 +181,7 @@
     <!-- Sidebar: Projects + Folders -->
     <aside
       id="leftPane"
-      class="resizable-pane bg-[#111] p-4 border-r border-gray-700 flex flex-col space-y-2"
+      class="resizable-pane p-4 border-r border-gray-700 flex flex-col space-y-2"
     >
       <div class="flex items-center justify-between">
         <h2 class="text-white text-lg font-semibold">Projects</h2>
@@ -51,7 +192,6 @@
           Hide
         </button>
       </div>
-
       <button
         id="newProjectBtn"
         class="bg-gray-800 hover:bg-gray-700 px-3 py-1 rounded text-white text-sm"
@@ -70,11 +210,9 @@
       >
         + New Note
       </button>
-
       <ul id="rootNoteList" class="space-y-1 text-sm"></ul>
       <ul id="projectList" class="space-y-1 text-sm"></ul>
     </aside>
-
     <!-- Hidden show-left button -->
     <button
       id="showLeftPane"
@@ -82,7 +220,6 @@
     >
       Projects
     </button>
-
     <!-- Middle Pane: Notes (Hidden by default, shown on folder click) -->
     <aside
       id="middlePane"
@@ -98,10 +235,8 @@
           Hide
         </button>
       </div>
-      <!-- No +New Note button here; it's only in the middle pane when a folder is open -->
       <ul id="noteList" class="space-y-1 text-sm text-white"></ul>
     </aside>
-
     <!-- Show Middle Pane Button -->
     <button
       id="showMiddlePane"
@@ -109,20 +244,25 @@
     >
       Notes
     </button>
-
     <!-- Main Area: Chat + Templates -->
     <main class="flex-1 p-6 flex flex-col max-w-4xl mx-auto">
+      <!-- Theme Toggle Button (top-right corner) -->
+      <div class="w-full flex justify-end mb-2">
+        <button
+          id="themeToggleBtn"
+          class="bg-gray-800 text-white px-3 py-1 rounded hover:bg-gray-600 text-lg shadow"
+          style="margin-top: 8px; margin-right: 8px"
+          title="Toggle dark/light mode"
+        >
+          🌙
+        </button>
+      </div>
       <h1 class="text-2xl font-bold text-white text-center mb-2">SiteWise</h1>
-
-      <!-- Chat and Template Builder -->
       <div class="flex-1 flex flex-col justify-between">
-        <!-- Chat Output -->
         <div
           id="chatWindow"
           class="overflow-y-auto px-2 py-2 space-y-3 border border-gray-700 rounded-lg mb-4 bg-[#2a2a2a] flex-1"
         ></div>
-
-        <!-- Template Builder UI -->
         <div
           id="templateBuilder"
           class="hidden flex flex-col gap-4 text-white mt-4"
@@ -135,13 +275,12 @@
           </button>
           <button
             id="addSectionBtn"
-            class="bg-gray-700 hover:bg-gray-600 px-3 py-1 rounded text-xs w-fit"
+            class="bg-gray-800 hover:bg-gray-700 px-3 py-1 rounded text-xs w-fit"
           >
             + Add Section
           </button>
           <div id="templateSections" class="space-y-4"></div>
         </div>
-
         <!-- Chat Input -->
         <div class="relative mt-4">
           <input type="file" id="chatFileInput" class="hidden" />
@@ -151,15 +290,14 @@
             placeholder="Type your note..."
             class="w-full resize-none rounded-lg p-3 pl-10 pr-20 bg-[#1a1a1a] text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-green-400"
           ></textarea>
-
           <button
             id="chatUploadBtn"
-            class="absolute bottom-3 left-3 bg-transparent text-white hover:bg-gray-700 px-3 py-1 rounded text-sm"
+            class="absolute bottom-3 left-3 px-3 py-1 rounded text-sm"
             title="Upload file"
+            style="background: transparent"
           >
             <i class="fas fa-plus"></i>
           </button>
-
           <div class="absolute bottom-3 right-3 flex gap-2">
             <button
               id="micBtn"
@@ -178,8 +316,6 @@
           </div>
         </div>
       </div>
-
-      <!-- Create Template -->
       <button
         id="createTemplateBtn"
         class="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded text-sm w-fit mt-6"
@@ -187,7 +323,6 @@
         + Create Template
       </button>
     </main>
-
     <!-- Pane Toggle Logic -->
     <script>
       const toggleLeftPaneBtn = document.getElementById("toggleLeftPane");
@@ -196,31 +331,27 @@
       const showMiddlePaneBtn = document.getElementById("showMiddlePane");
       const leftPane = document.getElementById("leftPane");
       const middlePane = document.getElementById("middlePane");
-
       toggleLeftPaneBtn.addEventListener("click", () => {
         leftPane.style.display = "none";
         showLeftPaneBtn.classList.remove("hidden");
       });
-
       toggleMiddlePaneBtn.addEventListener("click", () => {
         middlePane.style.display = "none";
         showMiddlePaneBtn.classList.remove("hidden");
       });
-
       showLeftPaneBtn.addEventListener("click", () => {
         leftPane.style.display = "flex";
         showLeftPaneBtn.classList.add("hidden");
       });
-
       showMiddlePaneBtn.addEventListener("click", () => {
         middlePane.style.display = "block";
         showMiddlePaneBtn.classList.add("hidden");
       });
     </script>
-
     <!-- Scripts -->
     <script src="./cameraHandler.js"></script>
     <script src="./app.js"></script>
     <script src="./voiceRecorder.js"></script>
+    <script src="./themeToggle.js"></script>
   </body>
 </html>

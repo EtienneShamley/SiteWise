@@ -468,3 +468,23 @@ document.addEventListener("DOMContentLoaded", () => {
   renderRootNotes();
   renderProjects();
 });
+// --- UPLOAD "+" BUTTON LOGIC ---
+const chatUploadBtn = document.getElementById("chatUploadBtn");
+const chatFileInput = document.getElementById("chatFileInput");
+
+if (chatUploadBtn && chatFileInput) {
+  chatUploadBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    chatFileInput.click();
+  });
+
+  chatFileInput.addEventListener("change", (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      // For now just show an alert, or replace this with your file processing logic
+      alert(`Selected: ${file.name}`);
+      // TODO: Implement your file handling/upload logic here
+    }
+  });
+}
+
